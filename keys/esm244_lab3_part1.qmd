@@ -119,7 +119,7 @@ write_sf(sesbania_nocounty_sf, here("data","red_sesbania","ds80_for_lab.gpkg"))
 
 ## Read in the sesbania data
 
-The data exist in `data/red_sesbania`, and the shapefile is stored as `ds80_for_lab.gpkg`.  We also want to check the coordinate reference system, and plot the data for a quick visual understanding.
+The data exist in `data/red_sesbania`, and the shapefile is stored as `ds80_for_lab.gpkg`. We also want to check the coordinate reference system, and plot the data for a quick visual understanding.
 
 ```{r}
 sesbania_sf <- read_sf(here("data","red_sesbania","ds80_for_lab.gpkg")) %>%
@@ -185,7 +185,6 @@ We can also join the other direction:
 sesb_counties_sf <- sesbania_3857_sf %>% 
   st_join(ca_counties_sf)
 
-head(sesb_counties_sf)
 ```
 
 This one keeps the point geometry of the plant records, but appends the county name and area from the CA map.
@@ -215,11 +214,6 @@ ggplot(data = sesb_counts_sf) +
 So we see that we can still use our usual wrangling skills! Let's do a bit more for fun, just to prove that our existing wrangling skills still work with spatial data - the spatial information just sticks to it! Only plot the county with the greatest number of red sesbania records, and make a map of those locations (yeah there are many ways to do this).
 
 ### Pseudocode here!
-
-
-
-
-
 
 ```{r}
 # Subset of sesbania point locations only in Solano County
@@ -252,11 +246,11 @@ Sometimes we'll want to make a map interactive so that audience members can zoom
 # Set the viewing mode to "interactive":
 tmap_mode(mode = "view")
 
-# Then make a map (with the polygon fill color updated by variable 'land_km2', updating the color palette to "BuGn"), then add another shape layer for the sesbania records (added as dots):
 tm_shape(ca_counties_sf) +
   tm_fill("land_km2", palette = "BuGn") +
   tm_shape(sesbania_sf) +
   tm_dots()
+
 ```
 
 See *all* kinds of other cool ways you can update your interactive tmaps.
